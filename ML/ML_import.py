@@ -35,6 +35,22 @@ from sklearn.model_selection import GridSearchCV as GSCV
 from sklearn.feature_selection import RFECV
 from sklearn.metrics import *
 
+'''visual output'''
+import matplotlib.pyplot as plt
+import seaborn as sns
+color = sns.color_palette()
+
+'''data frame'''
+import pandas as pd
+
+
+'''python version of command line'''
+from subprocess import check_output
+print(check_output(["ls", "../input"]).decode("utf8"))
+
+
+
+
 ''' tensorflow 
 import tensorflow as tf   # tensorflow only for python >= 3.5
 
