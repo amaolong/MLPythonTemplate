@@ -1,0 +1,44 @@
+''' basic idea '''
+
+1. load data, pre-processing if necessary
+2. set-up network structure, optimizer, etc.
+3. perform operations like train/evaluate/predict/save using session
+
+alternatively, use keras as a high level framework to all these purposes
+
+
+
+''' common & useful tips '''
+import tensorflow as tf
+import matplotlib.pyplot as plt
+
+# %% Construct a tf.Session to execute the graph.
+sess = tf.Session()
+result = sess.run(x)
+
+# %% We can setup an interactive session if we don't
+# want to keep passing the session around:
+sess.close()
+sess = tf.InteractiveSession()
+
+# or evaluation call
+x.eval(session=sess)
+
+# %% We can also list all the operations of a graph:
+ops = tf.get_default_graph().get_operations()
+print([op.name for op in ops])
+
+
+# %% Load up an image:
+from skimage import data
+img = data.astronaut()
+plt.imshow(img)
+print(img.shape)
+
+# %% Now create a placeholder for our graph which can store any input:
+x = tf.placeholder(tf.float32, shape=img.shape)
+
+
+
+
+
