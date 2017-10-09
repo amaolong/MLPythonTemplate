@@ -49,11 +49,11 @@ from sklearn.metrics import *
     
 '''
 import matplotlib.pyplot as plt
-plt.switch_backend('agg')  # for plotting in linux
+%matplotlib inline
 import seaborn as sns
 color = sns.color_palette()
 import pylab as pl # for basic plotting
-
+plt.switch_backend('agg')  # for plotting in linux
 '''
     data frame
     https://pandas.pydata.org/pandas-docs/stable/api.html
