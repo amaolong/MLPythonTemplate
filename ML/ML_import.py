@@ -6,7 +6,7 @@ from __future__ import division
 from __future__ import print_function   # print function in python 3.x
 import xlrd # read spreadsheet
 import sys
-import os
+import os   ## cmd call os.system('cmd')
 import argparse
 import csv
 from random import randint

@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7ff93813-732d-4aa0-b0a8-79f2fcb9393b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ML/TF_tutorials/predict_param.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ML/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ML/tensorflow_main_structure.py" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/ML/tensorflow_summary_template.py" afterPath="$PROJECT_DIR$/ML/classification_template.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ML/ML_import.py" afterPath="$PROJECT_DIR$/ML/ML_import.py" />
     </list>
@@ -35,11 +31,9 @@
       <file leaf-file-name="ML_import.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ML/ML_import.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
-              <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="57" />
-              <folding>
-                <element signature="e#33#71#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="178">
+              <caret line="11" column="26" lean-forward="true" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -47,7 +41,7 @@
       <file leaf-file-name="predict_param.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ML/TF_tutorials/predict_param.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2497">
+            <state relative-caret-position="3686">
               <caret line="209" column="10" lean-forward="false" selection-start-line="209" selection-start-column="10" selection-end-line="209" selection-end-column="10" />
               <folding>
                 <element signature="e#10#28#0" expanded="true" />
@@ -69,7 +63,7 @@
       <file leaf-file-name="04.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ML/TF_tutorials/04.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="483">
+            <state relative-caret-position="2128">
               <caret line="115" column="0" lean-forward="false" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
               <folding />
             </state>
@@ -99,8 +93,8 @@
       <file leaf-file-name="panda_DF_example.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ML/panda_DF_example.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="26" selection-end-column="10" />
+            <state relative-caret-position="1263">
+              <caret line="82" column="13" lean-forward="false" selection-start-line="82" selection-start-column="4" selection-end-line="82" selection-end-column="13" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -121,7 +115,7 @@
       <file leaf-file-name="main_template.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main_template.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="872">
+            <state relative-caret-position="684">
               <caret line="46" column="57" lean-forward="false" selection-start-line="46" selection-start-column="57" selection-end-line="46" selection-end-column="57" />
               <folding>
                 <element signature="e#29#67#0" expanded="true" />
@@ -133,7 +127,7 @@
       <file leaf-file-name="classification_template.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ML/classification_template.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
+            <state relative-caret-position="76">
               <caret line="19" column="3" lean-forward="true" selection-start-line="19" selection-start-column="3" selection-end-line="19" selection-end-column="3" />
               <folding>
                 <element signature="e#10#28#0" expanded="true" />
@@ -165,12 +159,13 @@
       <find>correlation</find>
       <find>groupby</find>
       <find>hist</find>
-      <find>os</find>
       <find>sns</find>
       <find>histo</find>
       <find>join</find>
       <find>subprocess</find>
       <find>inline</find>
+      <find>jointplot</find>
+      <find>os</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -197,8 +192,8 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="2552" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="2597" />
     <option name="y" value="351" />
     <option name="width" value="1936" />
     <option name="height" value="1066" />
@@ -240,6 +235,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -257,7 +253,6 @@
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -416,17 +411,17 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="2552" y="351" width="1936" height="1066" extended-state="7" />
+    <frame x="2552" y="351" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14552239" sideWeight="0.4874759" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14712153" sideWeight="0.4874759" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32991317" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42067876" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14522494" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3291239" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16427784" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" x="22" y="485" width="2516" height="439" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3164278" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" x="22" y="485" width="2516" height="439" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12877584" sideWeight="0.51252407" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -475,20 +470,8 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ML/tensorflow/tensorflow_main_structure.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ML/tensorflow/tensorflow_summary_template.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/ML/tensorflow/tensorflow_main_structure.py" />
+    <entry file="file://$PROJECT_DIR$/ML/tensorflow/tensorflow_summary_template.py" />
     <entry file="file://$PROJECT_DIR$/ML/panda_DF_example.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1003">
@@ -503,13 +486,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ML/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/ML/__init__.py" />
     <entry file="file://$PROJECT_DIR$/OR/MIP_template.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -517,20 +494,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ML/tensorflow/tensorflow_main_structure.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ML/tensorflow/tensorflow_summary_template.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/ML/tensorflow/tensorflow_main_structure.py" />
+    <entry file="file://$PROJECT_DIR$/ML/tensorflow/tensorflow_summary_template.py" />
     <entry file="file://$PROJECT_DIR$/main_template.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="612">
@@ -559,20 +524,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ML/tensorflow/tensorflow_main_structure.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ML/tensorflow/tensorflow_summary_template.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/ML/tensorflow/tensorflow_main_structure.py" />
+    <entry file="file://$PROJECT_DIR$/ML/tensorflow/tensorflow_summary_template.py" />
     <entry file="file://$PROJECT_DIR$/ML/ML_import" />
     <entry file="file://$PROJECT_DIR$/OR/MIP_template.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -581,20 +534,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ML/tensorflow/tensorflow_main_structure.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ML/tensorflow/tensorflow_summary_template.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/ML/tensorflow/tensorflow_main_structure.py" />
+    <entry file="file://$PROJECT_DIR$/ML/tensorflow/tensorflow_summary_template.py" />
     <entry file="file://$PROJECT_DIR$/main_template.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="756">
@@ -620,20 +561,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ML/tensorflow/tensorflow_main_structure.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ML/tensorflow/tensorflow_summary_template.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/ML/tensorflow/tensorflow_main_structure.py" />
+    <entry file="file://$PROJECT_DIR$/ML/tensorflow/tensorflow_summary_template.py" />
     <entry file="file://C:/Program Files/IBM/ILOG/CPLEX_Enterprise_Server1262/CPLEX_Studio/cplex/python/3.4/x64_win64/cplex/callbacks.py" />
     <entry file="file://$PROJECT_DIR$/tensorflow_structure.py" />
     <entry file="file://C:/Program Files/IBM/ILOG/CPLEX_Enterprise_Server1262/CPLEX_Studio/cplex/python/3.4/x64_win64/setup.py" />
@@ -654,7 +583,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -676,7 +604,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ML/TF_tutorials/predict_param.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2497">
+        <state relative-caret-position="3686">
           <caret line="209" column="10" lean-forward="false" selection-start-line="209" selection-start-column="10" selection-end-line="209" selection-end-column="10" />
           <folding>
             <element signature="e#10#28#0" expanded="true" />
@@ -686,7 +614,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ML/TF_tutorials/04.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
+        <state relative-caret-position="2128">
           <caret line="115" column="0" lean-forward="false" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
           <folding />
         </state>
@@ -700,30 +628,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ML/tensorflow/tensorflow_main_structure.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ML/tensorflow/tensorflow_summary_template.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ML/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/ML/tensorflow/tensorflow_main_structure.py" />
+    <entry file="file://$PROJECT_DIR$/ML/tensorflow/tensorflow_summary_template.py" />
+    <entry file="file://$PROJECT_DIR$/ML/__init__.py" />
     <entry file="file://$PROJECT_DIR$/OR/MIP_template.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -734,7 +641,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main_template.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="872">
+        <state relative-caret-position="684">
           <caret line="46" column="57" lean-forward="false" selection-start-line="46" selection-start-column="57" selection-end-line="46" selection-end-column="57" />
           <folding>
             <element signature="e#29#67#0" expanded="true" />
@@ -744,7 +651,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ML/classification_template.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
+        <state relative-caret-position="76">
           <caret line="19" column="3" lean-forward="true" selection-start-line="19" selection-start-column="3" selection-end-line="19" selection-end-column="3" />
           <folding>
             <element signature="e#10#28#0" expanded="true" />
@@ -757,8 +664,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ML/panda_DF_example.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="26" selection-end-column="10" />
+        <state relative-caret-position="1263">
+          <caret line="82" column="13" lean-forward="false" selection-start-line="82" selection-start-column="4" selection-end-line="82" selection-end-column="13" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
@@ -767,11 +674,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ML/ML_import.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="57" />
-          <folding>
-            <element signature="e#33#71#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="178">
+          <caret line="11" column="26" lean-forward="true" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
+          <folding />
         </state>
       </provider>
     </entry>
