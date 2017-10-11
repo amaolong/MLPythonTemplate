@@ -1,3 +1,5 @@
+'''scikit learn base learner parameters for classification'''
+
 # skrf : scikit-learn random forest
 skrf_params={}
 skrf_params['n_estimators'] = [100,500,1000]
@@ -207,18 +209,38 @@ random_state : int, RandomState instance or None, optional (default=None)
 The seed of the pseudo random number generator to use when shuffling the data. If int, random_state is the seed used by the random number generator; If RandomState instance, random_state is the random number generator; If None, the random number generator is the RandomState instance used by np.random.
 '''
 
-# sknbb : scikit-learn naive bayes BernoulliNB # for binary features (multivariate Bernoulli models)
+# sknbb : scikit-learn naive bayes Bernoulli features (multivariate Bernoulli models)
 sknbb_params={}
-pass
+sknbb_params['alpha']==[0.5,1,2]
+sknbb_params['fit_prior']=[True, False]
 '''
-
+alpha : float, optional (default=1.0)
+Additive (Laplace/Lidstone) smoothing parameter (0 for no smoothing).
+binarize : float or None, optional (default=0.0)
+Threshold for binarizing (mapping to booleans) of sample features. If None, input is presumed to already consist of binary vectors.
+fit_prior : boolean, optional (default=True)
+Whether to learn class prior probabilities or not. If false, a uniform prior will be used.
+class_prior : array-like, size=[n_classes,], optional (default=None)
+Prior probabilities of the classes. If specified the priors are not adjusted according to the data.
 '''
-# sknbg : scikit-learn naive bayes GaussianNB #
+# sknbg : scikit-learn naive bayes Gaussian features #
 sknbg_params={}
 pass
 '''
-
+priors : array-like, shape (n_classes,)
+Prior probabilities of the classes. If specified the priors are not adjusted according to the data.
 '''
-
+# sknbm : scikit-learn naive bayes Multinomial features #
+sknbm_params={}
+sknbm_params['alpha']=[0.5,1,2]
+'''
+	
+alpha : float, optional (default=1.0)
+Additive (Laplace/Lidstone) smoothing parameter (0 for no smoothing).
+fit_prior : boolean, optional (default=True)
+Whether to learn class prior probabilities or not. If false, a uniform prior will be used.
+class_prior : array-like, size (n_classes,), optional (default=None)
+Prior probabilities of the classes. If specified the priors are not adjusted according to the data.
+'''
 # parameter collection
 param_collection=[skrf_params,sket_params,sknn_params,sksvm_params,sknbb_params,sknbg_params]
