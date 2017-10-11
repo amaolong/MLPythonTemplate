@@ -1,34 +1,6 @@
-# imports
-import numpy as np
-import pandas as pd
-import sklearn as sk
-import xgboost as xgb
-#import lightgbm as lgbm # gcc issue
-from sklearn.ensemble import RandomForestClassifier
-#from forest import *  # modified random forest with gwava study to deal with class balance
-from sklearn.preprocessing import LabelEncoder
-from sklearn.model_selection import StratifiedKFold
-from sklearn.metrics import roc_curve, auc
-import pylab as pl
-import sys,os
-import gc
-import random
-import matplotlib
-import matplotlib.pyplot as plt
-matplotlib.pyplot.switch_backend('agg')
+'''parameters for base learner'''
 
-
-used_class_weight='balanced'
-# modified sklearn rf
-forest_params={}
-forest_params['n_estimators'] = 100
-forest_params['max_depth']=None
-forest_params['min_samples_split']=2
-forest_params['balance_classes']=0
-forest_params['compute_importances']=True
-forest_params['oob_score']=True
-forest_params['n_jobs'] = 5
-# sklearn_rf
+'''sklearn_random fprest'''
 skrf_params={}
 skrf_params['n_estimators'] = 100
 skrf_params['criterion'] = 'gini'   # 'entropy'
@@ -36,10 +8,10 @@ skrf_params['max_depth'] = 5
 skrf_params['max_features'] = 'auto'
 skrf_params['min_samples_split'] = 2
 skrf_params['oob_score'] = True
-skrf_params['class_weight']=used_class_weight
+skrf_params['class_weight']='balanced'
 skrf_params['bootstrap'] = True
 skrf_params['n_jobs'] = 5
-# lgbm
+'''lgbm'''
 lgbm_params = {}
 lgbm_params['max_bin'] = 10
 lgbm_params['learning_rate'] = 0.002  # shrinkage_rate
@@ -59,7 +31,8 @@ lgbm_params['feature_fraction_seed'] = 2
 lgbm_params['bagging_seed'] = 3
 lgbm_params['max_depth'] = 100
 lgbm_params['weight_column'] = ''
-# xgboost
+
+'''xgboost'''
 xgb_params={}
 # objective and evaluation
 xgb_params['objective'] = 'binary:logistic'
@@ -126,14 +99,11 @@ Because old behavior is always use exact greedy in single machine, user will get
 xgb_params['subsample'] = 0.8
 xgb_params['colsample_bytree'] = 1
 xgb_params['colsample_bylevel'] = 1
-xgb_params['scale_pos_weight'] = max(matching_type[_matching].label.value_counts().values) \
-                                 / min(matching_type[_matching].label.value_counts().values)
+#xgb_params['scale_pos_weight'] = max(matching_type[_matching].label.value_counts().values) / min(matching_type[_matching].label.value_counts().values)
 xgb_params['base_score']=0.5    # base score for all predictions
 xgb_params['sketch_eps'] = 0.03  # default, used in approximation algorithms
 xgb_params['silent']=0          # 0 means printing running messages, 1 means silent mode.
-
 xgb_params['grow_policy']= 'depthwise'   # 'lossguide'
-
 # xgb_params['updater']
 '''
 A comma separated string defining the sequence of tree updaters to run, providing a modular way to construct and to modify the trees. This is an advanced parameter that is usually set automatically, depending on some other parameters. However, it could be also set explicitely by a user. The following updater plugins exist:
@@ -151,15 +121,23 @@ In a distributed setting, the implicit updater sequence value would be adjusted 
 "distcol" when dsplit="col"
 '''
 #
+''' sklearn linear regression'''
+
+''' sklearn logistic regression'''
+
+''' sklearn 1 nearest neightbour'''
+
 model_params={
-    'forest':forest_params,
+    'sklr':sklr_params,
+    'sklogr':sklogr_params,
+    'sk1nn':sk1nn_params,
     'skrf':skrf_params,
     'xgb':xgb_params,
     'lgbm':lgbm_params
 }
-## set parameters
+
 if method == 'skrf':
-    clf = sk.ensemble.RandomForestClassifier(**method_param_dict[method])
+    clf = sk.ensemble.RandomForestClassifier(**model_params[method])
 if method == 'xgb':
     pass
 ## set prediction
@@ -171,61 +149,7 @@ if method == 'forest' or method == 'skrf':
 if method == 'xgb':
     xgb_data = xgb.DMatrix(X[train], label=y[train])
     xgb_data_test = xgb.DMatrix(X[test])
-    clf = xgb.train(method_param_dict[method], xgb_data, num_boost_round=20)
+    clf = xgb.train(model_params[method], xgb_data, num_boost_round=20)
     pred = clf.predict(xgb_data_test)
-## set K fold stratified cross validation
-for i, (train, test) in enumerate(cv.split(df.drop(cls, axis=1).values,df[cls].values)):
-    pass
 
-## record roc curve
-
-mean_tpr = 0.0
-mean_fpr = np.linspace(0, 1, 100)
-    for _ in range(10): ## cross validation
-        fpr, tpr, thresholds = curve_type(y[test], pred)
-        mean_tpr += np.interp(mean_fpr, fpr, tpr)
-        mean_tpr[0] = 0.0
-        roc_auc = auc(fpr, tpr)
-        if do_plot:
-            pl.plot(fpr, tpr, lw=1, label='ROC fold %d (area = %0.2f)' % (i, roc_auc))  # cross validation roc curve
-
-if do_plot:
-    pl.plot([0, 1], [0, 1], '--', color=(0.6, 0.6, 0.6), label='Chance')
-mean_tpr /= k
-mean_tpr[-1] = 1.0
-mean_auc = auc(mean_fpr, mean_tpr)
-# plotting
-if do_plot:
-    pl.plot(mean_fpr, mean_tpr, 'k--',
-            label='Mean ROC (area = %0.2f)' % mean_auc, lw=2)
-    pl.xlim([-0.05, 1.05])
-    pl.ylim([-0.05, 1.05])
-    pl.xlabel('False Positive Rate')
-    pl.ylabel('True Positive Rate')
-    pl.title('10-fold cross validation')
-    pl.legend(loc="lower right")
-    figure_name = outdir + method + '_' + matching + '_10-fold_cv.pdf'
-    pl.savefig(figure_name)
-    pl.close()
-## feature importance
-def feat_imp(model, df, method, cls='label'):
-    '''
-    :param model:
-    :param df:
-    :param cls:
-    :return:
-    '''
-    if method=='forest' or method=='skrf':
-        idx = model.feature_importances_.argsort()
-        fis = pd.Series(model.feature_importances_[idx[::-1]], index=df.columns.drop(cls)[idx[::-1]].values)
-    if method=='xgb':
-        feat_imp_data=np.zeros(df.columns.drop(cls).shape)
-        tmp=pd.DataFrame.from_dict(model.get_fscore(),orient='index').reset_index()
-        tmp['idx']=tmp['index']
-        tmp_vec=tmp['index'].values
-        tmp['idx'] = list(map(lambda x: int(x.replace('f', '')), tmp_vec))
-        for i, _ in enumerate(tmp['idx']):
-            feat_imp_data[_]=tmp[0][i]
-        fis = pd.Series(feat_imp_data/feat_imp_data.sum(), index=df.columns.drop(cls).values)
-    fis.sort_values(ascending=False,inplace=True)
-    return fis
+'''rebase to this version'''
