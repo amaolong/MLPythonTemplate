@@ -257,11 +257,12 @@ def populate_params(param_collection):
         keys=list(_.key())      # keys of individual model
         combination_numbers=[]  # available parameters for each key
         combination_total=1     # total parameter combination
-
+        combination_vec=[]
         for _key in keys:
             combination_numbers.append(len(skrf_params[_key]))
         for _iter in combination_numbers:
             combination_total=np.multiply(combination_total,_iter)
+
         # need to create combination here
         for _iter in combination_numbers:
             for _iter2 in range(_iter):
@@ -270,18 +271,20 @@ def populate_params(param_collection):
 
 
             '''
-            >>> a_vec=[]
-            >>> for i1 in combination_numbers[0]:
-            ...  for i2 in combination_numbers[1]:
-            ...   for i3 in combination_numbers[2]:
-            ...    for i4 in combination_numbers[3]:
-            ...       a[0]=i1
-            ...       a[1]=i2
-            ...       a[2]=i3
-            ...       a[3]=i4
-            ...       a_vec.append(a)
-            ...
-            
+            rvec.clear()
+            for i in range(all_num):
+              r=[0,0,0,0]
+              rvec.append(r)
+                
+            for _ in range(len(num)):
+             frac_mu=int(all_num/num[_])
+             print('handling position ',_,frac_mu)  
+             for i in range(num[_]):
+               for j in range(frac_mu):
+                rvec[j+frac_mu*i][_]=i
+               #
+                print(rvec)
+             print('\n') 
             
             '''
         param_combination.append(t)
