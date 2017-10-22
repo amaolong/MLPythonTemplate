@@ -5,12 +5,12 @@ skrf_params={}
 skrf_params['n_estimators'] = [100,500,1000]
 skrf_params['criterion'] = ['gini', 'entropy']
 skrf_params['max_depth'] = [5,10]
-skrf_params['max_features'] = 'auto'
-skrf_params['min_samples_split'] = 2
-skrf_params['oob_score'] = True
-skrf_params['class_weight'] = 'balanced'
-skrf_params['bootstrap'] = True
-skrf_params['n_jobs'] = 5
+skrf_params['max_features'] = ['auto']
+skrf_params['min_samples_split'] = [2]
+skrf_params['oob_score'] = [True]
+skrf_params['class_weight'] = ['balanced']
+skrf_params['bootstrap'] = [True]
+skrf_params['n_jobs'] = [5]
 '''
 n_estimators : integer, optional (default=10)
 The number of trees in the forest.
@@ -77,12 +77,12 @@ sket_params={}
 sket_params['n_estimators'] = [100,500,1000]
 sket_params['criterion'] = ['gini', 'entropy']
 sket_params['max_depth'] = [5,10]
-sket_params['max_features'] = 'auto'
-sket_params['min_samples_split'] = 2
-sket_params['oob_score'] = True
-sket_params['class_weight']='balance'
-sket_params['bootstrap'] = True
-sket_params['n_jobs'] = 5
+sket_params['max_features'] = ['auto']
+sket_params['min_samples_split'] = [2]
+sket_params['oob_score'] = [True]
+sket_params['class_weight']=['balance']
+sket_params['bootstrap'] = [True]
+sket_params['n_jobs'] = [5]
 '''
 criterion : string, optional (default=”gini”)
 The function to measure the quality of a split. Supported criteria are “gini” for the Gini impurity and “entropy” for the information gain.
@@ -138,10 +138,10 @@ sknn_params={}  # should not making this too complicated
 sknn_params['n_neighbors'] = [1,5,10]
 sknn_params['weights'] = ['uniform','distance']
 sknn_params['algorithm'] = ['ball_tree','kd_tree']
-sknn_params['max_features'] = 'auto'
+sknn_params['max_features'] = ['auto']
 sknn_params['p'] = [1,2]
-sknn_params['metric'] = ['','']
-sknn_params['n_jobs'] = 5
+sknn_params['metric'] = ['euclidean','chebyshev']
+sknn_params['n_jobs'] = [5]
 '''
 n_neighbors : int, optional (default = 5)
 Number of neighbors to use by default for kneighbors queries.
@@ -164,6 +164,9 @@ Power parameter for the Minkowski metric. When p = 1, this is equivalent to usin
 metric : string or callable, default ‘minkowski’
 the distance metric to use for the tree. The default metric is minkowski, and with p=2 is equivalent to the standard Euclidean metric. See the documentation of the DistanceMetric class for a list of available metrics.
 metric_params : dict, optional (default = None)
+
+http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.DistanceMetric.html#sklearn.neighbors.DistanceMetric
+
 Additional keyword arguments for the metric function.
 n_jobs : int, optional (default = 1)
 The number of parallel jobs to run for neighbors search. If -1, then the number of jobs is set to the number of CPU cores. Doesn’t affect fit method.
@@ -172,9 +175,9 @@ The number of parallel jobs to run for neighbors search. If -1, then the number 
 sksvm_params={}  # linear/non-linear get about 10 of this
 sksvm_params['C'] = [0.1,1,10]
 sksvm_params['kernel'] = ['linear','poly', 'bf', 'sigmoid']
-sksvm_params['degree'] = 3
-sksvm_params['gamma'] = 'auto'
-sksvm_params['class_weight'] = 'balanced'
+sksvm_params['degree'] = [3]
+sksvm_params['gamma'] = ['auto']
+sksvm_params['class_weight'] = ['balanced']
 '''
 C : float, optional (default=1.0)
 Penalty parameter C of the error term.
@@ -225,7 +228,6 @@ Prior probabilities of the classes. If specified the priors are not adjusted acc
 '''
 # sknbg : scikit-learn naive bayes Gaussian features #
 sknbg_params={}
-pass
 '''
 priors : array-like, shape (n_classes,)
 Prior probabilities of the classes. If specified the priors are not adjusted according to the data.
@@ -243,4 +245,71 @@ class_prior : array-like, size (n_classes,), optional (default=None)
 Prior probabilities of the classes. If specified the priors are not adjusted according to the data.
 '''
 # parameter collection
-param_collection=[skrf_params,sket_params,sknn_params,sksvm_params,sknbb_params,sknbg_params]
+param_collection=[skrf_params,sket_params,sknn_params,sksvm_params]
+
+
+
+import numpy as np
+
+class model_param():
+    model_name=''
+    number_of_combination=0
+    param_combination = []
+    def __init__(self,name):
+        self.model_name=name
+
+    def insert(self,_dict):
+        self.param_combination.append(_dict)
+        self.number_of_combination+=1
+
+def populate_params(param_collection):
+
+    '''
+
+    :param param_collection:
+    :return:
+    '''
+
+    param_combination=[]
+    # populate each combination for different models
+    collection=param_collection
+    for _ in collection:
+        t=model_param(_)
+        size=len(_)             # key size
+        keys=list(_.key())      # keys of individual model
+        combination_numbers=[]  # available parameters for each key
+        combination_total=1     # total parameter combination
+        combination_vec=[]
+        for _key in keys:
+            combination_numbers.append(len(skrf_params[_key]))
+        for _iter in combination_numbers:
+            combination_total=np.multiply(combination_total,_iter)
+
+        # need to create combination here
+        for _iter in combination_numbers:
+            for _iter2 in range(_iter):
+                temp_param_dict={}
+                for _key in keys:
+
+
+            '''
+            rvec.clear()
+            for i in range(all_num):
+              r=[0,0,0,0]
+              rvec.append(r)
+                
+            for _ in range(len(num)):
+             frac_mu=int(all_num/num[_])
+             print('handling position ',_,frac_mu)  
+             for i in range(num[_]):
+               for j in range(frac_mu):
+                rvec[j+frac_mu*i][_]=i
+               #
+                print(rvec)
+             print('\n') 
+            
+            '''
+        param_combination.append(t)
+
+    return param_combination
+
