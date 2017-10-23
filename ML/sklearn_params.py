@@ -256,77 +256,78 @@ class model_param(object):
     number_of_combination=0
     param_combination = []
     unique_combinations=0
-
     def __init__(self,name,val):
         self.model_name=name
         self.unique_combinations=val
-
     def insert(self,_dict):
         self.param_combination.append(_dict)
         self.number_of_combination+=1
 
 def populate_params(param_collection,param_collection_names):
-
     '''
-
     :param param_collection:
     :return:
     '''
-
+    #
     param_combination=[]
     # populate each combination for different models
     collection=param_collection
     collection_names=param_collection_names
-
     for idx, _ in enumerate(collection):
-
         # get length, keys, unique combinations
-        size=len(_)             # key size
-        keys=list(_.key())      # keys of individual model
+        keys=list(_.keys())      # keys of individual model
         combination_numbers=[]  # available parameters for each key
         combination_total=1     # total parameter combination
-        combination_vec=[]
         for _key in keys:
-            combination_numbers.append(len(skrf_params[_key]))
+            combination_numbers.append(len(_[_key]))
         for _iter in combination_numbers:
             combination_total=np.multiply(combination_total,_iter)
-
+        #
         # model_param object
         t = model_param(collection_names[idx], combination_total)
-
-        # need to create combination here
-
-        ''' use logic below to enumerate all permutation'''
-        r_seed = [0, 0, 0, 0]
-        num = [3, 1, 2, 4]
-        rvec = []
-
-        for idx in range(len(num)):
-            for i in range(num[idx]):
-                if idx == 0:
+        #
+        # generate parameter index
+        r_seed=[]
+        rvec=[]
+        prev_size = 0
+        for _2 in range(len(combination_numbers)):
+            r_seed.append(0)
+        #
+        for idx1 in range(len(combination_numbers)):
+            _size = len(rvec)
+            for i in range(combination_numbers[idx1]):
+                if idx1 == 0:
                     tmp = []
-                    for idx2 in range(len(num)):
-                        if idx2 != idx:
+                    for idx2 in range(len(combination_numbers)):
+                        if idx2 != idx1:
                             tmp.append(r_seed[idx2])
                         else:
                             tmp.append(i)
-                    # print('appending', tmp)
                     rvec.append(tmp)
-                    # print(rvec)
                 else:
-                    size = len(rvec)
-                    for _ in range(size):
+                    for _2 in range(prev_size,_size):
                         tmp = []
-                        for idx2 in range(len(num)):
-                            if idx2 != idx:
-                                tmp.append(rvec[_][idx2])
+                        for idx2 in range(len(combination_numbers)):
+                            if idx2 != idx1:
+                                tmp.append(rvec[_2][idx2])
                             else:
                                 tmp.append(i)
                         rvec.append(tmp)
-
-
-
+            prev_size=_size
+        rvec=rvec[prev_size:]   # last couple enumeration are the unique ones
+        #
+        print(param_collection_names[idx],', current: ',len(rvec), ', unique: ',combination_total)
+        rvec=np.unique(rvec,axis=0)
+        assert len(rvec)==combination_total, 'unique combinations not equal'
+        #
+        # converting parameter index to parameter dictionaries
+        for param_idx in rvec:
+            tdict={}
+            for t_idx,val in enumerate(param_idx):
+                tdict[keys[t_idx]]=_[keys[t_idx]][val]
+            t.insert(tdict)
+        #
         param_combination.append(t)
-
+    #
     return param_combination
 
