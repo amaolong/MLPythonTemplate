@@ -246,23 +246,26 @@ Prior probabilities of the classes. If specified the priors are not adjusted acc
 '''
 # parameter collection
 param_collection=[skrf_params,sket_params,sknn_params,sksvm_params]
-
+param_collection_names=['skrf_params','sket_params','sknn_params','sksvm_params']
 
 
 import numpy as np
 
-class model_param():
+class model_param(object):
     model_name=''
     number_of_combination=0
     param_combination = []
-    def __init__(self,name):
+    unique_combinations=0
+
+    def __init__(self,name,val):
         self.model_name=name
+        self.unique_combinations=val
 
     def insert(self,_dict):
         self.param_combination.append(_dict)
         self.number_of_combination+=1
 
-def populate_params(param_collection):
+def populate_params(param_collection,param_collection_names):
 
     '''
 
@@ -273,8 +276,11 @@ def populate_params(param_collection):
     param_combination=[]
     # populate each combination for different models
     collection=param_collection
-    for _ in collection:
-        t=model_param(_)
+    collection_names=param_collection_names
+
+    for idx, _ in enumerate(collection):
+
+        # get length, keys, unique combinations
         size=len(_)             # key size
         keys=list(_.key())      # keys of individual model
         combination_numbers=[]  # available parameters for each key
@@ -285,30 +291,41 @@ def populate_params(param_collection):
         for _iter in combination_numbers:
             combination_total=np.multiply(combination_total,_iter)
 
+        # model_param object
+        t = model_param(collection_names[idx], combination_total)
+
         # need to create combination here
-        for _iter in combination_numbers:
-            for _iter2 in range(_iter):
-                temp_param_dict={}
-                for _key in keys:
+
+        ''' use logic below to enumerate all permutation'''
+        r_seed = [0, 0, 0, 0]
+        num = [3, 1, 2, 4]
+        rvec = []
+
+        for idx in range(len(num)):
+            for i in range(num[idx]):
+                if idx == 0:
+                    tmp = []
+                    for idx2 in range(len(num)):
+                        if idx2 != idx:
+                            tmp.append(r_seed[idx2])
+                        else:
+                            tmp.append(i)
+                    # print('appending', tmp)
+                    rvec.append(tmp)
+                    # print(rvec)
+                else:
+                    size = len(rvec)
+                    for _ in range(size):
+                        tmp = []
+                        for idx2 in range(len(num)):
+                            if idx2 != idx:
+                                tmp.append(rvec[_][idx2])
+                            else:
+                                tmp.append(i)
+                        rvec.append(tmp)
 
 
-            '''
-            rvec.clear()
-            for i in range(all_num):
-              r=[0,0,0,0]
-              rvec.append(r)
-                
-            for _ in range(len(num)):
-             frac_mu=int(all_num/num[_])
-             print('handling position ',_,frac_mu)  
-             for i in range(num[_]):
-               for j in range(frac_mu):
-                rvec[j+frac_mu*i][_]=i
-               #
-                print(rvec)
-             print('\n') 
-            
-            '''
+
         param_combination.append(t)
 
     return param_combination
