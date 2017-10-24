@@ -245,8 +245,8 @@ class_prior : array-like, size (n_classes,), optional (default=None)
 Prior probabilities of the classes. If specified the priors are not adjusted according to the data.
 '''
 # parameter collection
-param_collection=[skrf_params,sket_params,sknn_params,sksvm_params]
-param_collection_names=['skrf_params','sket_params','sknn_params','sksvm_params']
+param_collection_sk_default=[skrf_params,sket_params,sknn_params,sksvm_params]
+param_collection_names_sk_default=['skrf_params','sket_params','sknn_params','sksvm_params']
 
 
 

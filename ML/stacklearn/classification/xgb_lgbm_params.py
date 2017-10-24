@@ -112,6 +112,6 @@ In a distributed setting, the implicit updater sequence value would be adjusted 
 "distcol" when dsplit="col"
 '''
 
-param_collection=[xgb_params,lgbm_params]
-param_collection_names=['xgb_params','lgbm_params']
+param_collection_xgb_lgbm_default=[xgb_params,lgbm_params]
+param_collection_names_xgb_lgbm_default=['xgb_params','lgbm_params']
 
