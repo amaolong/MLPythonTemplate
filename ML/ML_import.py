@@ -39,7 +39,10 @@ from subprocess import call
 cmd = 'command line operations'
 call(cmd, shell=True)
 '''
+import glob, os
 
+os.chdir('dir to check')
+file_list = glob.glob("*.csv")  # file names to search, return as a list of file names
 
 
 ''' 
