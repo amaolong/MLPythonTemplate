@@ -1,6 +1,9 @@
 import numpy as np
 
 class model_param(object):
+    '''
+    model parameter class
+    '''
     model_name=''
     number_of_combination=0
     param_combination = []
@@ -20,10 +23,30 @@ class model_param(object):
         self.param_combination.append(_dict)
         self.number_of_combination+=1
 
+    def sample(self):
+        '''
+        sample 2-4 different model from each category
+        :param model_params_by_type:
+        :return:
+        '''
+
+        size = len(self.param_combination)
+        sample_size = 0
+        if (size > 10):
+            sample_size = 3
+        else:
+            sample_size = 2
+        idx = []
+        #
+        while (len(np.unique(idx)) < sample_size):  # getting non duplicated index
+            idx = np.random.randint(0, size - 1, sample_size)
+        for _2 in idx:
+            self.sampled_model_params.append(self.param_combination[_2])
+
 def populate_params(param_collection,param_collection_names,load_type):
     '''
     :param param_collection:
-    :return:
+    :return: all possible models and parameters stored in model_param object list
     '''
     #
     param_combination=[]
@@ -87,29 +110,4 @@ def populate_params(param_collection,param_collection_names,load_type):
         param_combination.append(t)
     #
     return param_combination
-
-def sample_model(model_params_object):
-    sampled_model_params=[]   # object containing list of dictionaries
-
-    '''
-    sample 2-4 different model from each category
-    :param model_params_by_type:
-    :return:
-    '''
-
-    for _ in model_params_object:
-        size=len(_.param_combination)
-        sample_size=0
-        if (size>10):
-            sample_size=3
-        else:
-            sample_size=2
-        idx=[]
-        #
-        while(len(np.unique(idx))<sample_size):  # getting non duplicated index
-            idx=np.random.randint(0,size-1,sample_size)
-        for _2 in idx:
-            _.sampled_model_params.append(_.param_combination[_2])
-        #
-    return sampled_model_params
 

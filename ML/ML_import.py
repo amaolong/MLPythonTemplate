@@ -46,7 +46,7 @@ file_list = glob.glob("*.csv")  # file names to search, return as a list of file
 
 
 ''' 
-    skicit learn ML package 
+    scikit learn ML package 
     http://scikit-learn.org/stable/modules/classes.html
 '''
 # classification

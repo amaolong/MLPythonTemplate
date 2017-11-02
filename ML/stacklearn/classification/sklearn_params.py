@@ -214,7 +214,7 @@ The seed of the pseudo random number generator to use when shuffling the data. I
 
 # sknbb : scikit-learn naive bayes Bernoulli features (multivariate Bernoulli models)
 sknbb_params={}
-sknbb_params['alpha']==[0.5,1,2]
+sknbb_params['alpha']=[0.5,1,2]
 sknbb_params['fit_prior']=[True, False]
 '''
 alpha : float, optional (default=1.0)
@@ -246,7 +246,7 @@ Prior probabilities of the classes. If specified the priors are not adjusted acc
 '''
 # parameter collection
 param_collection_sk_default=[skrf_params,sket_params,sknn_params,sksvm_params]
-param_collection_names_sk_default=['skrf_params','sket_params','sknn_params','sksvm_params']
+param_collection_names_sk_default=['skrf','sket','sknn','sksvm']
 
 
 
