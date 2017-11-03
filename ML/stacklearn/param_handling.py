@@ -1,6 +1,6 @@
 import numpy as np
 
-class model_param(object):
+class model_param():
     '''
     model parameter class
     '''
@@ -20,8 +20,8 @@ class model_param(object):
         self.loadtype=loadtype
 
     def insert(self,_dict):
-        self.param_combination.append(_dict)
-        self.number_of_combination+=1
+        self.param_combination=_dict
+        self.number_of_combination=len(_dict)
 
     def sample(self):
         '''
@@ -31,6 +31,7 @@ class model_param(object):
         '''
 
         size = len(self.param_combination)
+        print(self.model_name,size)
         sample_size = 0
         if (size > 10):
             sample_size = 3
@@ -40,9 +41,12 @@ class model_param(object):
         #
         while (len(np.unique(idx)) < sample_size):  # getting non duplicated index
             idx = np.random.randint(0, size - 1, sample_size)
+        #print(idx)
+        t_model_params=[]
         for _2 in idx:
-            self.sampled_model_params.append(self.param_combination[_2])
-
+            t_model_params.append(self.param_combination[_2])
+        self.sampled_model_params=t_model_params
+        #print(self.sampled_model_params)
 def populate_params(param_collection,param_collection_names,load_type):
     '''
     :param param_collection:
@@ -99,14 +103,19 @@ def populate_params(param_collection,param_collection_names,load_type):
         # print(param_collection_names[idx],', current: ',len(rvec), ', unique: ',combination_total)
         rvec=np.unique(rvec,axis=0)
         assert len(rvec)==combination_total, 'unique combinations not equal'
+        print(collection_names[idx]," has ",combination_total," parameter combinations")
         #
         # converting parameter index to parameter dictionaries
+        t_dict_list=[]
         for param_idx in rvec:
             tdict={}
             for t_idx,val in enumerate(param_idx):
                 tdict[keys[t_idx]]=_[keys[t_idx]][val]
-            t.insert(tdict)
+            t_dict_list.append(tdict)
+        t.insert(t_dict_list)
         #
+        print(collection_names[idx],"'s actual param comb: ",len(t.param_combination))
+        #print(t.param_combination)
         param_combination.append(t)
     #
     return param_combination

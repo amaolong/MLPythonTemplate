@@ -1,6 +1,7 @@
 '''scikit-learn base learner parameters for classification'''
 
 # skrf : scikit-learn random forest
+# 12 total combinations
 skrf_params={}
 skrf_params['n_estimators'] = [100,500,1000]
 skrf_params['criterion'] = ['gini', 'entropy']
@@ -73,6 +74,7 @@ For multi-output, the weights of each column of y will be multiplied.
 Note that these weights will be multiplied with sample_weight (passed through the fit method) if sample_weight is specified.
 '''
 # sket : scikit-learn extreme tree
+#  12 total combinations
 sket_params={}
 sket_params['n_estimators'] = [100,500,1000]
 sket_params['criterion'] = ['gini', 'entropy']
@@ -135,6 +137,7 @@ Note that these weights will be multiplied with sample_weight (passed through th
 '''
 # sknn : scikit-learn nearest neighbour
 sknn_params={}  # should not making this too complicated
+#  48 total combinations
 sknn_params['n_neighbors'] = [1,5,10]
 sknn_params['weights'] = ['uniform','distance']
 sknn_params['algorithm'] = ['ball_tree','kd_tree']
@@ -173,6 +176,7 @@ The number of parallel jobs to run for neighbors search. If -1, then the number 
 '''
 # sksvm : scikit-learn support vector machine  
 sksvm_params={}  # linear/non-linear get about 10 of this
+#  12 total combinations
 sksvm_params['C'] = [0.1,1,10]
 sksvm_params['kernel'] = ['linear','poly', 'bf', 'sigmoid']
 sksvm_params['degree'] = [3]
@@ -213,6 +217,7 @@ The seed of the pseudo random number generator to use when shuffling the data. I
 '''
 
 # sknbb : scikit-learn naive bayes Bernoulli features (multivariate Bernoulli models)
+# 6 total combinations
 sknbb_params={}
 sknbb_params['alpha']=[0.5,1,2]
 sknbb_params['fit_prior']=[True, False]
@@ -246,7 +251,8 @@ Prior probabilities of the classes. If specified the priors are not adjusted acc
 '''
 # parameter collection
 param_collection_sk_default=[skrf_params,sket_params,sknn_params,sksvm_params]
-param_collection_names_sk_default=['skrf','sket','sknn','sksvm']
+param_collection_names_sk_default=['skrf','skef','sknn','sksvm']
+
 
 
 

@@ -20,7 +20,7 @@ reg_lambda=1,
 scale_pos_weight=1,
 subsample=1)
 '''
-
+# 24 total combinations
 xgb_params={}
 # training parameters
 xgb_params['base_score']=[0.5]
@@ -61,8 +61,9 @@ subsample=1,
 subsample_for_bin=50000,
 subsample_freq=1)
 '''
+# 24 total combinations
 lgbm_params={}
-lgbm_params['boosting_type']=['gbdt','']
+lgbm_params['boosting_type']=['gbdt','dart']
 '''
 gbdt, traditional Gradient Boosting Decision Tree. 
 dart, Dropouts meet Multiple Additive Regression Trees. 
