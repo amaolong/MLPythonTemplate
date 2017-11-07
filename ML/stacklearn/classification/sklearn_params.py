@@ -182,6 +182,7 @@ sksvm_params['kernel'] = ['linear','poly', 'bf', 'sigmoid']
 sksvm_params['degree'] = [3]
 sksvm_params['gamma'] = ['auto']
 sksvm_params['class_weight'] = ['balanced']
+sksvm_params['probability']=True
 '''
 C : float, optional (default=1.0)
 Penalty parameter C of the error term.
