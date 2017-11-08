@@ -5,9 +5,11 @@ import all library model api call interface and embedding them into a dictionary
 is with keys uniquely defined across ntire system
 
 '''
-from param_handling import *
-from classification.sklearn_params import *
-from classification.xgb_params_sklearn_interface import *
+# customized class and functions
+from ML.stacklearn.param_handling import *
+from ML.stacklearn.classification.sklearn_params import *
+from ML.stacklearn.classification.xgb_params_sklearn_interface import *
+from ML.stacklearn.stack_model import *
 # scikit-learn
 from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier as RFC
@@ -17,7 +19,7 @@ from sklearn.neighbors import KNeighborsClassifier as KNN
 import xgboost as xgb
 # lgbm
 import lightgbm as lgbm
-from stack_model import *
+# general import
 import numpy as np
 #
 model_dict={}

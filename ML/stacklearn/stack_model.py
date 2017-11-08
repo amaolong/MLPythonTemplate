@@ -21,15 +21,15 @@ class stack_model():
             _.fit(self.X, self.y)
     def fit2(self):
         # first layer
-        self.fit1(self.X,self.y) # train
+        self.fit1() # train
         t_res =self.predict1(self.X) # predict
         # second layer
         for i, _ in enumerate(self.lv2_model_list):
             _.fit(t_res,self.y)
     def fit3(self):
         # first two layers
-        self.fit2(self.X,self.y) # train
-        t_res=self.predict(self.X) # predict
+        self.fit2() # train
+        t_res=self.predict1(self.X) # predict
         # second layer
         for i, _ in enumerate(self.lv3_model_list):
             _.fit(t_res, self.y)
@@ -65,13 +65,13 @@ class stack_model():
 
     # full implementation below (fixed structure)
     def fit_2layers(self):
-        self.fit1(self.X,self.y)
+        self.fit1()
         t_res =self.predict1(self.X)
         # second layer
         self.lv2_model_list[0].fit(t_res,self.y)
     def fit_3layers(self):
         # first two layers
-        self.fit_2layers(self.X,self.y)
+        self.fit_2layers()
         t_res=self.predict2(self.X)
         # third layer
         self.lv3_model_list[0].fit(t_res,self.y)
@@ -82,7 +82,7 @@ class stack_model():
         return self.lv2_model_list[0].predict(t_res)
     def predict_2layers_w_raw_features(self, X):
         # first layer
-        t_res = np.hstack(X, self.predict1(X))
+        t_res = np.hstack([X,self.predict1(X)])
         # second layer
         return self.lv2_model_list[0].predict(t_res)
     def predict_3layers(self,X):
@@ -92,6 +92,6 @@ class stack_model():
         return self.lv3_model_list[0].predict(t_res)
     def predict_3layers_w_raw_features(self,X):
         # first two layers
-        t_res=np.hstack(X,self.predict_2layers(X))
+        t_res=np.hstack([X,self.predict_2layers(X)])
         # third layer
         return self.lv3_model_list[0].predict(t_res)
