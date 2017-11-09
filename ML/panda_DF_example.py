@@ -6,6 +6,25 @@ import seaborn as sns
 
 '''example'''
 
+
+'''mysql example'''
+
+import mysql.connector as sql
+mysql_cn= sql.connect(host='myhost',port=3306,user='myusername',
+                      passwd='mypassword',db='information_schema')
+df_mysql = pd.read_sql('select * from table ;', con=mysql_cn)
+mysql_cn.close()
+
+# hierarchical clustering
+
+f = sns.clustermap(figsize=(32, 32), data=data, robust=True, method='complete', metric='canberra', standard_scale=0,
+                   row_cluster=True, col_cluster=True)
+
+plt.show()
+# output clustered data
+f.data2d.to_csv()
+
+
 train_df = pd.read_csv("train_2016.csv", parse_dates=["transactiondate"])      # parse_dates
 '''
 parse_dates : boolean or list of ints or names or list of lists or dict, default False
@@ -43,25 +62,18 @@ cnt_srs = train_df['transaction_month'].value_counts()      # count the number i
 plt.figure(figsize=(12,6))
 sns.barplot(cnt_srs.index, cnt_srs.values, alpha=0.8, color=color[3])
 plt.xticks(rotation='vertical')
-plt.xlabel('Month of transaction', fontsize=12)
-plt.ylabel('Number of Occurrences', fontsize=12)
 plt.show()
 
 # count the number of instance with resetting of index
 (train_df['parcelid'].value_counts().reset_index())['parcelid'].value_counts()      # df.reset_index() can be seen as adding a new index to the df,
 
-'''
-note, most of the object return by panda is with df.index and df.values attributes
-so, reset index is to set the index to the returning values (probably first column), and then put the data column label on the data
-
-'''
 
 '''example 2'''
 prop_df = pd.read_csv("properties_2016.csv")
 prop_df.shape
 
 
-'''checking on missing values'''
+'''checking on missing values, sort by column'''
 missing_df = prop_df.isnull().sum(axis=0).reset_index()     # reset index
 missing_df.columns = ['column_name', 'missing_count']       # add in column names
 missing_df = missing_df.ix[missing_df['missing_count']>0]
@@ -81,35 +93,27 @@ plt.show()
 '''check out two dimensional distribution using sns.joinplot'''
 plt.figure(figsize=(12,12))
 sns.jointplot(x=prop_df.latitude.values, y=prop_df.longitude.values, size=10)
-plt.ylabel('Longitude', fontsize=12)
-plt.xlabel('Latitude', fontsize=12)
 plt.show()
 
 
-'''merge data, check column type, aggregate and count'''
+'''merge data, check column type, aggregate and count, change pandas display settings'''
 train_df = pd.merge(train_df, prop_df, on='parcelid', how='left')
 pd.options.display.max_rows = 65
 dtype_df = train_df.dtypes.reset_index()
 dtype_df.columns = ["Count", "Column Type"]
-dtype_df
 dtype_df.groupby("Column Type").aggregate('count').reset_index()
 
-'''some more basic usage'''
-missing_df = train_df.isnull().sum(axis=0).reset_index()
-missing_df.columns = ['column_name', 'missing_count']
-missing_df['missing_ratio'] = missing_df['missing_count'] / train_df.shape[0]
-missing_df.ix[missing_df['missing_ratio']>0.999]
 
-
-'''univariate analysis, impute missing values with mean and calculate correlation with target variable'''
+'''fillna with mean values'''
 # Let us just impute the missing values with mean values to compute correlation coefficients #
 mean_values = train_df.mean(axis=0)     # missing values in each category
 train_df_new = train_df.fillna(mean_values, inplace=True)       # fillna
 
-# Now let us look at the correlation coefficient of each of these variables #
+# trick for select data in a list and with conditions
 x_cols = [col for col in train_df_new.columns if col not in ['logerror'] if train_df_new[col].dtype == 'float64']
 '''get a lit of columns using this one line conditioning format'''
 
+'''sns.barh'''
 labels = []
 values = []
 for col in x_cols:
@@ -152,19 +156,16 @@ plt.show()
 '''count plot for certain column'''
 plt.figure(figsize=(12,8))
 sns.countplot(x="bathroomcnt", data=train_df)       # countplot | mean value will also be plotted after the fillna procedure
-plt.ylabel('Count', fontsize=12)
-plt.xlabel('Bathroom', fontsize=12)
 plt.xticks(rotation='vertical')
 plt.title("Frequency of Bathroom count", fontsize=15)
 plt.show()
 '''distribution of the target variable w.r.t certain column'''
 plt.figure(figsize=(12,8))
 sns.boxplot(x="bathroomcnt", y="logerror", data=train_df)       # boxplot
-plt.ylabel('Log error', fontsize=12)
-plt.xlabel('Bathroom Count', fontsize=12)
 plt.xticks(rotation='vertical')
 plt.title("How log error changes with bathroom count?", fontsize=15)
 plt.show()
+
 '''
 #violinplot
 sns.violinplot(x='bedroomcnt', y='logerror', data=train_df)

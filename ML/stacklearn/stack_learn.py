@@ -67,13 +67,13 @@ for _ in models:
 for _ in models:
     for _2 in _.sampled_model_params:
         t_model = model_dict[_.model_name].set_params(**_2)
-        level_1_models.append(t_model)
+        level_2_models.append(t_model)
 
 # insert lv3 model
 for _ in models:
     for _2 in _.sampled_model_params:
         t_model = model_dict[_.model_name].set_params(**_2)
-        level_1_models.append(t_model)
+        level_3_models.append(t_model)
 
 # visual check
 for _ in level_1_models:
