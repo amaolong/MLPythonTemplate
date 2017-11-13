@@ -178,7 +178,7 @@ The number of parallel jobs to run for neighbors search. If -1, then the number 
 sksvc_params={}  # linear/non-linear get about 10 of this
 #  12 total combinations
 sksvc_params['C'] = [0.1,1,10]
-sksvc_params['kernel'] = ['linear','poly', 'bf', 'sigmoid']
+sksvc_params['kernel'] = ['linear','poly', 'rbf', 'sigmoid']
 sksvc_params['degree'] = [3]
 sksvc_params['gamma'] = ['auto']
 # sksvc_params['class_weight'] = ['balanced']  # later will have sample weight in the fit function to replace this
