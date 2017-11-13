@@ -24,20 +24,17 @@ subsample=1)
 xgb_params={}
 # training parameters
 xgb_params['base_score']=[0.5]
-xgb_params['booster']=['gbtree','dart']  # gbtree/gblinear/dart
 xgb_params['learning_rate']=[0.1]
 xgb_params['max_depth'] = [5,10]
 xgb_params['n_estimators']=[50,100,200]
 xgb_params['subsample'] = [0.8,1]
 xgb_params['objective'] =['binary:logistic']
-xgb_params['n_jobs']=[5]
+xgb_params['nthread']=[5]
 xgb_params['gamma'] =[0]  # default=0, alias: min_split_loss
 xgb_params['reg_alpha'] = [0.4]  # l1 regularization
 xgb_params['reg_lambda'] = [0.8]  # l2 regularization
 xgb_params['colsample_bytree'] = [1]
 xgb_params['colsample_bylevel'] = [1]
-
-
 '''
 lightgbm parameters through scikit-learn interface
 

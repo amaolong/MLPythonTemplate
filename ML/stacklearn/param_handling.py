@@ -19,6 +19,9 @@ class model_param():
         self.unique_combinations=val
         self.loadtype=loadtype
 
+    def __eq__(self, other):
+        return self.model_name==other
+    
     def insert(self,_dict):
         self.param_combination=_dict
         self.number_of_combination=len(_dict)

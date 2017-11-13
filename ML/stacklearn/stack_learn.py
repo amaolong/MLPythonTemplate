@@ -23,12 +23,12 @@ import lightgbm as lgbm
 import numpy as np
 #
 model_dict={}
-model_dict['sksvc']=SVC()
-model_dict['skrf']=RFC()
-model_dict['skef']=EFC()
-model_dict['sknn']=KNN()
-model_dict['xgb']=xgb.XGBClassifier()
-model_dict['lgbm']=lgbm.LGBMClassifier()
+model_dict['sksvc']=SVC
+model_dict['skrf']=RFC
+model_dict['skef']=EFC
+model_dict['sknn']=KNN
+model_dict['xgb']=xgb.XGBClassifier
+model_dict['lgbm']=lgbm.LGBMClassifier
 
 ''' FLAGS '''
 model_level=2    # 2 or 3
@@ -38,7 +38,7 @@ debug=True
 ''' handling model parameters '''
 # pull model type, populate different parameters and sample a few to be used as base learners
 
-models=populate_params(param_collection_names_sk_default,param_collection_names_sk_default,0)
+models=populate_params(param_collection_sk_default,param_collection_names_sk_default,0)
 for _ in populate_params(param_collection_xgb_lgbm_default,param_collection_names_xgb_lgbm_default,0):
     models.append(_)
 

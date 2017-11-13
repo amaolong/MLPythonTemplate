@@ -113,5 +113,5 @@ In a distributed setting, the implicit updater sequence value would be adjusted 
 '''
 
 param_collection_xgb_lgbm_default=[xgb_params,lgbm_params]
-param_collection_names_xgb_lgbm_default=['xgb_params','lgbm_params']
+param_collection_names_xgb_lgbm_default=['xgb','lgbm']
 

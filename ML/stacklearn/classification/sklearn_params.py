@@ -1,4 +1,5 @@
 '''scikit-learn base learner parameters for classification'''
+# add logistic regression here
 
 # skrf : scikit-learn random forest
 # 12 total combinations
@@ -9,7 +10,7 @@ skrf_params['max_depth'] = [5,10]
 skrf_params['max_features'] = ['auto']
 skrf_params['min_samples_split'] = [2]
 skrf_params['oob_score'] = [True]
-skrf_params['class_weight'] = ['balanced']
+#skrf_params['class_weight'] = ['balanced']     # later will have sample weight in the fit function to replace this
 skrf_params['bootstrap'] = [True]
 skrf_params['n_jobs'] = [5]
 '''
@@ -82,7 +83,7 @@ sket_params['max_depth'] = [5,10]
 sket_params['max_features'] = ['auto']
 sket_params['min_samples_split'] = [2]
 sket_params['oob_score'] = [True]
-sket_params['class_weight']=['balance']
+# sket_params['class_weight']=['balance']   # later will have sample weight in the fit function to replace this
 sket_params['bootstrap'] = [True]
 sket_params['n_jobs'] = [5]
 '''
@@ -141,7 +142,6 @@ sknn_params={}  # should not making this too complicated
 sknn_params['n_neighbors'] = [1,5,10]
 sknn_params['weights'] = ['uniform','distance']
 sknn_params['algorithm'] = ['ball_tree','kd_tree']
-sknn_params['max_features'] = ['auto']
 sknn_params['p'] = [1,2]
 sknn_params['metric'] = ['euclidean','chebyshev']
 sknn_params['n_jobs'] = [5]
@@ -174,15 +174,15 @@ Additional keyword arguments for the metric function.
 n_jobs : int, optional (default = 1)
 The number of parallel jobs to run for neighbors search. If -1, then the number of jobs is set to the number of CPU cores. Doesn’t affect fit method.
 '''
-# sksvm : scikit-learn support vector machine  
-sksvm_params={}  # linear/non-linear get about 10 of this
+# sksvc : scikit-learn support vector machine classifier
+sksvc_params={}  # linear/non-linear get about 10 of this
 #  12 total combinations
-sksvm_params['C'] = [0.1,1,10]
-sksvm_params['kernel'] = ['linear','poly', 'bf', 'sigmoid']
-sksvm_params['degree'] = [3]
-sksvm_params['gamma'] = ['auto']
-sksvm_params['class_weight'] = ['balanced']
-sksvm_params['probability']=True
+sksvc_params['C'] = [0.1,1,10]
+sksvc_params['kernel'] = ['linear','poly', 'bf', 'sigmoid']
+sksvc_params['degree'] = [3]
+sksvc_params['gamma'] = ['auto']
+# sksvc_params['class_weight'] = ['balanced']  # later will have sample weight in the fit function to replace this
+sksvc_params['probability'] = [True]
 '''
 C : float, optional (default=1.0)
 Penalty parameter C of the error term.
@@ -216,7 +216,6 @@ Changed in version 0.17: Deprecated decision_function_shape=’ovo’ and None.
 random_state : int, RandomState instance or None, optional (default=None)
 The seed of the pseudo random number generator to use when shuffling the data. If int, random_state is the seed used by the random number generator; If RandomState instance, random_state is the random number generator; If None, the random number generator is the RandomState instance used by np.random.
 '''
-
 # sknbb : scikit-learn naive bayes Bernoulli features (multivariate Bernoulli models)
 # 6 total combinations
 sknbb_params={}
@@ -251,8 +250,8 @@ class_prior : array-like, size (n_classes,), optional (default=None)
 Prior probabilities of the classes. If specified the priors are not adjusted according to the data.
 '''
 # parameter collection
-param_collection_sk_default=[skrf_params,sket_params,sknn_params,sksvm_params]
-param_collection_names_sk_default=['skrf','skef','sknn','sksvm']
+param_collection_sk_default=[skrf_params,sket_params,sknn_params,sksvc_params]
+param_collection_names_sk_default=['skrf','skef','sknn','sksvc']
 
 
 
