@@ -3,10 +3,17 @@ class stack_model():
     #
     X=[]
     y=[]
+    X1=[]
+    y1=[]
     # list of models
     lv1_model_list = []
     lv2_model_list = []
     lv3_model_list = []
+    #
+    lv1_rank_list=[]
+    lv1_score_list=[]
+    sample_weight=[]
+    additional_keywords={}
 
     def __init__(self,X,y,model_list_lv1,model_list_lv2,model_list_lv3=None):
         self.X=X
@@ -19,12 +26,39 @@ class stack_model():
         print('number of level 2 models: ', len(self.lv2_model_list))
         if self.lv3_model_list!=None:
             print('number of level 3 models: ', len(self.lv3_model_list))
+        # intialize sample weight and lv1_rank_list to be empty
+        self.lv1_rank_list=None
+        self.sample_weight=None
 
-    # by level implementation for debugging and alternative structure
+    # load validation, sample weight, and other stuffs
+    def load_validation_set(self,X1,y1):
+        self.X1=X1
+        self.y1=y1
+    def load_sample_weight(self,weight):
+        self.sample_weight=weight
+    def other_keywords(self,dict):
+        '''
+        this is mainly for swtich xgb/lgbm's objective function
+        :param dict:
+        :return:
+        '''
+        self.additional_keywords=dict
+        # plug in those keywords into existing model after key comparison
+        for _ in self.lv1_model_list:
+            tmp_dict={}
+            for _2 in _.get_params().keys():
+                if _2 in dict.keys():
+                    tmp_dict[_2]=dict[_2]
+            _.set_params(**tmp_dict)
+
+    # fit and predict
     def fit1(self):
         for i, _ in enumerate(self.lv1_model_list):
             print('fitting level 1 model - ',i+1,' out of ',len(self.lv1_model_list))
-            _.fit(self.X, self.y)
+            if self.sample_weight==None:
+                _.fit(self.X, self.y)
+            else:
+                _.fit(self.X,self.y,self.sample_weight)
     def fit2(self):
         # first layer
         self.fit1() # train
@@ -32,7 +66,10 @@ class stack_model():
         # second layer
         for i, _ in enumerate(self.lv2_model_list):
             print('fitting level 2 model - ', i+1, ' out of ', len(self.lv2_model_list))
-            _.fit(t_res,self.y)
+            if self.sample_weight==None:
+                _.fit(t_res,self.y)
+            else:
+                _.fit(t_res, self.y,self.sample_weight)
     def fit3(self):
         # first two layers
         self.fit2() # train
@@ -40,8 +77,10 @@ class stack_model():
         # third layer
         for i, _ in enumerate(self.lv3_model_list):
             print('fitting level 3 model - ', i+1, ' out of ', len(self.lv3_model_list))
-            _.fit(t_res, self.y)
-    #
+            if self.sample_weight==None:
+                _.fit(t_res, self.y)
+            else:
+                _.fit(t_res, self.y,self.sample_weight)
     def predict1(self,X):
         t_res = []
         if len(self.lv1_model_list) > 1:
@@ -81,7 +120,7 @@ class stack_model():
             t_res_3=self.lv3_model_list[0].predict(t_res_2)
         return t_res_3
     #
-    # fixed structure with raw features
+    # fit and predict with raw features and fixed structure
     def fit2_w_raw_features(self):
         # first layer
         self.fit1() # train
@@ -98,7 +137,6 @@ class stack_model():
         for i, _ in enumerate(self.lv3_model_list):
             print('fitting level 3 model - ', i+1, ' out of ', len(self.lv3_model_list))
             _.fit(t_res, self.y)
-    #
     def predict_2_w_raw_features(self, X):
         # first layer
         t_res = np.hstack([X,self.predict1(X)])
@@ -126,8 +164,49 @@ class stack_model():
         else:
             t_res_3=self.lv3_model_list[0].predict(t_res_2)
         return t_res_3
-    #
-    def get_best_level_1_estimator(self):
-        pass
-    def get_best_level_2_estimator(self):
-        pass
+
+    # evaluation and trimming
+    def evaluate_level_1_base_learner(self):
+        scorelist=[]
+        for _ in self.lv2_model_list:
+            if self.sample_weight==None:
+                scorelist.append(_.score(self.X1,self.y1))
+            else:
+                scorelist.append(_.score(self.X1,self.y1,self.sample_weight))
+        #
+        ranklist=np.ones(len(scorelist))*len(scorelist)-argsort(scorelist)
+        ranklist=[int(_) for _ in ranklist]
+        self.lv1_rank_list=ranklist
+        self.lv1_score_list=scorelist
+        ''' report following numbers '''
+        # best score with model parameters
+        print('best lv1 learner: ', ' score: ',scorelist[ranklist[0]], 'model: ',self.lv1_model_list[ranklist[0]])
+        # worst score with model parameters
+        print('worst lv1 learner: ', ' score: ', scorelist[ranklist[-1]], 'model: ', self.lv1_model_list[ranklist[-1]])
+        # mean
+        print('score mean: ',np.mean(scorelist))
+        # std
+        print('score std: ',np.std(scorelist))
+        print('score percentile at 10%, 20%, and 30% (the larger the better) ', np.percentile(scorelist,[10,20,30]))
+    def trim_level_1_base_learner(self, number_threshold=None, score_threshold=None):
+        '''
+        :param N:
+        :param score:
+        :return:
+        '''
+        if number_threshold!=None:
+            if number_threshold>len(self.lv1_rank_list):
+                print('number threshold too large, including all level 1 learners')
+            else:
+                del self.lv1_model_list[self.lv1_rank_list[number_threshold:]]
+                print('level 1 learner size: ', len(self.lv1_model_list))
+        if score_threshold!=None:
+            remove_list=[]
+            for _ in self.lv1_rank_list[::-1]:
+                if self.lv1_score_list[_]<score_threshold:
+                    remove_list.append(_)
+                else:
+                    break
+            del self.lv1_model_list[remove_list]
+            print('level 1 learner size: ', len(self.lv1_model_list))
+
