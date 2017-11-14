@@ -23,7 +23,7 @@ class stack_model():
     # by level implementation for debugging and alternative structure
     def fit1(self):
         for i, _ in enumerate(self.lv1_model_list):
-            print('fitting level 1 model - ',i,' out of ',len(self.lv1_model_list))
+            print('fitting level 1 model - ',i+1,' out of ',len(self.lv1_model_list))
             _.fit(self.X, self.y)
     def fit2(self):
         # first layer
@@ -31,7 +31,7 @@ class stack_model():
         t_res =self.predict1(self.X) # predict
         # second layer
         for i, _ in enumerate(self.lv2_model_list):
-            print('fitting level 2 model - ', i, ' out of ', len(self.lv2_model_list))
+            print('fitting level 2 model - ', i+1, ' out of ', len(self.lv2_model_list))
             _.fit(t_res,self.y)
     def fit3(self):
         # first two layers
@@ -39,7 +39,7 @@ class stack_model():
         t_res=self.predict2(self.X) # predict
         # third layer
         for i, _ in enumerate(self.lv3_model_list):
-            print('fitting level 3 model - ', i, ' out of ', len(self.lv3_model_list))
+            print('fitting level 3 model - ', i+1, ' out of ', len(self.lv3_model_list))
             _.fit(t_res, self.y)
     #
     def predict1(self,X):
@@ -88,7 +88,7 @@ class stack_model():
         t_res =np.hstack([self.X,self.predict1(self.X)]) # predict
         # second layer
         for i, _ in enumerate(self.lv2_model_list):
-            print('fitting level 2 model - ', i, ' out of ', len(self.lv2_model_list))
+            print('fitting level 2 model - ', i+1, ' out of ', len(self.lv2_model_list))
             _.fit(t_res,self.y)
     def fit3_w_raw_features(self):
         # first two layers
@@ -96,7 +96,7 @@ class stack_model():
         t_res = np.hstack([self.X,self.predict_2(self.X)])  # predict
         # third layer
         for i, _ in enumerate(self.lv3_model_list):
-            print('fitting level 3 model - ', i, ' out of ', len(self.lv3_model_list))
+            print('fitting level 3 model - ', i+1, ' out of ', len(self.lv3_model_list))
             _.fit(t_res, self.y)
     #
     def predict_2_w_raw_features(self, X):
