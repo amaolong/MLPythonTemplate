@@ -93,4 +93,37 @@ import h2o
 
 
 
+''' python thread usage '''
 
+
+import thread
+mutex = thread.allocate_lock()
+from threading import Thread
+
+threads = []
+output = []
+
+class thread_it(Thread):
+    def __init__ (self,param):
+        Thread.__init__(self)
+        self.param = param
+    def run(self):
+        # run stuff
+        pass
+
+        # access shared container
+        mutex.acquire()
+        output.append(calc_stuff(self.param))
+        mutex.release()
+
+
+
+
+
+for j in range(0, 10):
+    current = thread_it(j * offset)
+    threads.append(current)
+    current.start()
+
+for t in threads:
+    t.join()
