@@ -36,8 +36,8 @@ class model_param():
         size = len(self.param_combination)
         print(self.model_name,size)
         sample_size = 0
-        if (size > 10):
-            sample_size = 3
+        if (size > 50):
+            sample_size = 5
         else:
             sample_size = 2
         idx = []

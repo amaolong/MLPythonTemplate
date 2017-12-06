@@ -87,10 +87,10 @@ for _ in level_3_models:
 
 
 X=np.random.random([50,10])   # 50 obs each with 10 features
-y=np.random.ranint(0,2,50)    # 50 labels
+y=np.random.randint(0,2,50)    # 50 labels
 
 X1=np.random.random([50,10])   # 50 obs each with 10 features
-y1=np.random.ranint(0,2,50)    # 50 labels
+y1=np.random.randint(0,2,50)    # 50 labels
 
 '''prepare model data X, y'''
 

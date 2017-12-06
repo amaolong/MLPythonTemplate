@@ -6,9 +6,9 @@
 skrf_params={}
 skrf_params['n_estimators'] = [100,500,1000]
 skrf_params['criterion'] = ['gini', 'entropy']
-skrf_params['max_depth'] = [5,10]
-skrf_params['max_features'] = ['auto']
-skrf_params['min_samples_split'] = [2]
+skrf_params['max_depth'] = [5,10,15]
+skrf_params['max_features'] = [0.5, 0.8, 'auto']
+skrf_params['min_samples_split'] = [2,10,20]
 skrf_params['oob_score'] = [True]
 #skrf_params['class_weight'] = ['balanced']     # later will have sample weight in the fit function to replace this
 skrf_params['bootstrap'] = [True]
@@ -79,9 +79,9 @@ Note that these weights will be multiplied with sample_weight (passed through th
 sket_params={}
 sket_params['n_estimators'] = [100,500,1000]
 sket_params['criterion'] = ['gini', 'entropy']
-sket_params['max_depth'] = [5,10]
-sket_params['max_features'] = ['auto']
-sket_params['min_samples_split'] = [2]
+sket_params['max_depth'] = [5,10,15]
+sket_params['max_features'] = [0.5, 0.8, 'auto']
+sket_params['min_samples_split'] = [2, 10, 20]
 sket_params['oob_score'] = [True]
 # sket_params['class_weight']=['balance']   # later will have sample weight in the fit function to replace this
 sket_params['bootstrap'] = [True]

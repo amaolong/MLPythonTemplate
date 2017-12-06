@@ -20,7 +20,7 @@ class stack_model():
         self.y1=y1
     def load_sample_weight(self,weight):
         self.sample_weight=weight
-    def other_keywords(self,dict):
+    def additional_keywords(self,dict):
         '''
         this is mainly for swtich xgb/lgbm's objective function
         :param dict:
@@ -115,8 +115,8 @@ class stack_model():
             _.fit(t_res,self.y)
     def fit3_w_raw_features(self):
         # first two layers
-        self.fit2_w_raw_features()  # train
-        t_res = np.hstack([self.X,self.predict_2(self.X)])  # predict
+        self.fit2()  # train
+        t_res = np.hstack([self.X,self.predict2(self.X)])  # predict
         # third layer
         for i, _ in enumerate(self.lv3_model_list):
             print('fitting level 3 model - ', i+1, ' out of ', len(self.lv3_model_list))
@@ -162,9 +162,10 @@ class stack_model():
         ranklist=[int(_) for _ in ranklist]
         self.lv1_rank_list=ranklist
         self.lv1_score_list=scorelist
+        self.best_lv1_estimator=self.lv1_model_list[ranklist[0]]
         ''' report following numbers '''
         # best score with model parameters
-        print('best lv1 learner: ', ' score: ',scorelist[ranklist[0]], 'model: ',self.lv1_model_list[ranklist[0]])
+        print('best lv1 learner: ', ' score: ', scorelist[ranklist[0]], 'model: ', self.lv1_model_list[ranklist[0]])
         # worst score with model parameters
         print('worst lv1 learner: ', ' score: ', scorelist[ranklist[-1]], 'model: ', self.lv1_model_list[ranklist[-1]])
         # mean
@@ -193,4 +194,30 @@ class stack_model():
                     break
             del self.lv1_model_list[remove_list]
             print('level 1 learner size: ', len(self.lv1_model_list))
+
+    # override lv 2/3 output layer estimators/parameters
+    def override_lv2_learner(self):
+        '''
+        this will override lv 2 estimator with best structure in lv 1
+        :return:
+        '''
+        if self.best_lv1_estimator.__class__==self.lv2_model_list[0].__class__:
+            self.lv2_model_list[0]=self.best_lv1_estimator.__class__()
+            self.lv2_model_list[0].set_params(**self.best_lv1_estimator.get_params())
+        else:
+            print('change model from ',self.lv2_model_list[0].__class__, ' to ', self.best_lv1_estimator.__class__)
+            self.lv2_model_list[0] = self.best_lv1_estimator.__class__()
+            self.lv2_model_list[0].set_params(**self.best_lv1_estimator.get_params())
+    def override_lv3_learner(self):
+        '''
+        this will override lv 3 estimator with best structure in lv 1
+        :return:
+        '''
+        if self.best_lv1_estimator.__class__==self.lv3_model_list[0].__class__:
+            self.lv3_model_list[0]=self.best_lv1_estimator.__class__()
+            self.lv3_model_list[0].set_params(**self.best_lv1_estimator.get_params())
+        else:
+            print('change model from ',self.lv3_model_list[0].__class__, ' to ', self.best_lv1_estimator.__class__)
+            self.lv3_model_list[0] = self.best_lv1_estimator.__class__()
+            self.lv3_model_list[0].set_params(**self.best_lv1_estimator.get_params())
 
