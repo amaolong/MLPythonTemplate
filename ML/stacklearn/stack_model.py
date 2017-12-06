@@ -1,27 +1,11 @@
 import numpy as np
 class stack_model():
-    #
-    X=[]
-    y=[]
-    X1=[]
-    y1=[]
-    # list of models
-    lv1_model_list = []
-    lv2_model_list = []
-    lv3_model_list = []
-    #
-    lv1_rank_list=[]
-    lv1_score_list=[]
-    sample_weight=[]
-    additional_keywords={}
-
     def __init__(self,X,y,model_list_lv1,model_list_lv2,model_list_lv3=None):
         self.X=X
         self.y=y
         self.lv1_model_list=model_list_lv1
         self.lv2_model_list=model_list_lv2
         self.lv3_model_list=model_list_lv3
-
         print('number of level 1 models: ',len(self.lv1_model_list))
         print('number of level 2 models: ', len(self.lv2_model_list))
         if self.lv3_model_list!=None:
