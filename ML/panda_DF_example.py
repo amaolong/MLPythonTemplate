@@ -72,7 +72,6 @@ plt.show()
 prop_df = pd.read_csv("properties_2016.csv")
 prop_df.shape
 
-
 '''checking on missing values, sort by column'''
 missing_df = prop_df.isnull().sum(axis=0).reset_index()     # reset index
 missing_df.columns = ['column_name', 'missing_count']       # add in column names
